@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ocean.dao.SystemUserDao">
+	<select id="selectUserByUsername" resultType="SystemUser">
+		select * from sys_user where `username` = #{username}
+	</select>
+
+	<select id="selectAuthorityByUsername" resultType="java.lang.String">
+		select authority from sys_user where `username` = #{username}
+	</select>
+
+	<update id="setAuthorityByUsername">
+		update sys_user set `authority` = #{authority} where `username` = #{username}
+	</update>
+
+	<update id="deleteAuthorityByUsername">
+		update sys_user set authority = null where `username` = #{username}
+	</update>
+</mapper>

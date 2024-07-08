@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ocean.dao.ProcessConfigDao">
+	<select id="selectProcessConfigByProcessKey" resultType="ProcessConfig">
+		select * from process_config where `process_key` = #{processKey}
+	</select>
+
+	<select id="selectProcessConfigByBusinessRoute" resultType="ProcessConfig">
+		SELECT * FROM process_config WHERE `business_route` = #{businessRoute}
+	</select>
+
+	<delete id="deleteProcessConfigByProcessKey">
+		delete from process_config where `process_key` = #{processKey}
+	</delete>
+
+	<insert id="saveOrUpdateByProcessKey">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) from process_config where process_key = #{processKey}
+		</selectKey>
+		<if test="count > 0">
+			update process_config
+			set business_route = #{businessRoute}, form_name = #{formName}
+			where process_key = #{processKey}
+		</if>
+		<if test="count == 0">
+			insert into process_config(process_key, business_route, form_name)
+			values(#{processKey}, #{businessRoute}, #{formName})
+		</if>
+	</insert>
+
+</mapper>

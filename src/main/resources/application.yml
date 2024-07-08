@@ -1,0 +1,44 @@
+server:
+    port: 8080
+    servlet:
+        context-path: /api/v1.0/workflow
+        encoding:
+            charset: UTF-8
+            enabled: true
+
+spring:
+#    profiles:
+#        active: prod
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/rivers_oa_sys?nullCatalogMeansCurrent=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+        username: root
+        password: 123456
+    activiti:
+        database-schema-update: true
+        db-history-used: true # 启动创建历史表
+        history-level: full
+        check-process-definitions: false # 是否自动检查 resources/processes 的流程定义文件
+        # SMTP 服务
+#        mail-server-host: smtp.qq.com # SMTP 服务器地址
+#        mail-server-port: 465 # SSL 端口号
+#        mail-server-use-ssl: true # 开启 SLL 协议
+#        mail-server-default-from: 2733773021@qq.com # 默认邮件发送人
+#        mail-server-user-name: 2733773021@qq.com # 邮件用户名
+#        mail-server-password: xxx # SMTP 服务授权码
+#        deployment-mode: never-fail
+
+#logging:
+#    level:
+#        org.activiti.engine.impl.persistence.entity: debug
+
+mybatis:
+    configuration:
+        map-underscore-to-camel-case: true
+#        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    type-aliases-package: com.ocean.entity
+    mapper-locations: classpath:mapper/**/*.xml
+
+
+
+
